@@ -1,2 +1,4 @@
-title: Website cá nhân
+title: Trang của Uyên
+theme: minima
 markdown: kramdown
+permalink: /:title/

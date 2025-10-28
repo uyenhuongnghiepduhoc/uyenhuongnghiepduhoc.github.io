@@ -1,4 +1,4 @@
-title: Trang của Uyên
-theme: minima
-markdown: kramdown
-permalink: /:title/
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

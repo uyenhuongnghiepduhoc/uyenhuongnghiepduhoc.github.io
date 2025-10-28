@@ -1,0 +1,215 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: url('/assets/images/background_landscape.jpg');
+    background-size: cover;
+    background-position: right center;
+    font-family: 'VintageFont', serif;
+    color: #000;
+    position: relative;
+}
+
+/* tabs centered at the top */
+.tabs {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2.5rem;
+    z-index: 10;
+}
+
+.tabs a {
+    color: black;
+    text-decoration: none;
+    font-weight: 300; /* thinner */
+    font-size: 2.4rem; /* bigger */
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.4rem;
+    font-family: Neogro, Arial, sans-serif;
+}
+
+/* highlight current tab */
+.tabs a.current {
+    background: rgba(255,255,255,0.5);
+    border-radius: 8px;
+}
+
+/* hero centered middle with no box */
+.content .hero {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+    pointer-events: none;
+}
+.content .hero h1 {
+    margin: 0;
+    font-size: 3.2rem;
+    font-weight: 700;
+    font-family: Neogro, Arial, sans-serif;
+}
+.content .hero .welcome-message {
+    margin-top: 0.75rem;
+    font-size: 1.4rem;
+    font-family: Neogro, Arial, sans-serif;
+}
+
+.overlay {
+  position: absolute;
+  inset: 6vh 5vw; /* keep some breathing room from viewport edges */
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  z-index: 20;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+  left: 0;
+}
+
+/* side gray panel (10% width or min 120px) */
+.side-nav {
+  background: #747272; /* light gray */
+  width: 10%;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+.side-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.side-nav li { margin: 0.6rem 0; text-align: center; }
+.side-nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-family: Neogro, Arial, sans-serif;
+}
+.side-nav a.current {
+  background: rgba(255,255,255,0.9);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+}
+
+/* page content sits to the right of the gray panel */
+.page-content {
+  flex: 1 1 auto;
+  padding: 2.5rem;
+  color: #000;
+  overflow: auto;
+  /* ensure text reads well on translucent background */
+  -webkit-font-smoothing:antialiased;
+  font-family: Neogro, Arial, sans-serif;
+}
+
+/* portrait menu button (hidden in landscape) */
+.menu-wrapper {
+  display: none; /* only show in portrait via media query */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 30;
+}
+.menu-button {
+  background: rgba(0,0,0,0.08);
+  border: none;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 0.5rem;
+}
+.menu-dropdown a {
+  padding: 0.5rem 0.6rem;
+  text-decoration: none;
+  color: #111;
+  border-radius: 4px;
+}
+.menu-dropdown a + a { margin-top: 0.25rem; }
+.menu-dropdown a.current {
+  background: rgba(0,0,0,0.06);
+}
+
+/* --- Responsive rules --- */
+/* Portrait / tall screens: collapse side-nav and show menu button.
+   Also place the overlay to full height (so content can be scrolled). */
+@media (max-aspect-ratio: 1/1), (orientation: portrait) {
+  .overlay {
+    inset: 4vh 3vw; /* slightly larger overlay area */
+    flex-direction: column;
+  }
+  .side-nav { display: none; }
+  .menu-wrapper { display: block; }
+  .page-content { padding: 1.25rem; overflow: auto; }
+  /* push the hero near bottom if present inside the page-content */
+  .page-content .hero {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-top: auto;
+    margin-bottom: 3vh;
+    text-align: center;
+  }
+}
+
+/* keep previous landscape defaults for wide screens */
+@media (min-aspect-ratio: 1/1) {
+  .menu-wrapper { display: none; }
+  .side-nav { display: flex; }
+}
+
+/* responsive */
+@media (max-width: 768px) {
+    .tabs a { font-size: 1.6rem; }
+    .content .hero h1 { font-size: 2.2rem; }
+}
+/* portrait / tall screens: use the portrait background image */
+@media (max-aspect-ratio: 1/1), (orientation: portrait) {
+    body {
+        background-image: url('/assets/images/background_portrait.jpg');
+        background-size: cover;
+        /* keep the image anchored to the right so it "fits from the right" */
+        background-position: right bottom;
+    }
+
+    .tabs { gap: 1rem; top: 1rem; }
+    .tabs a { font-size: 1.2rem; }
+    /* move hero near the bottom on portrait screens */
+    .content .hero {
+        position: absolute;
+        left: 50%;
+        bottom: 6%;     /* distance from the bottom; adjust as needed */
+        top: auto;
+        transform: translateX(-50%); /* only center horizontally */
+        text-align: center;
+        z-index: 1;
+        pointer-events: none;
+    }
+    .content .hero h1 { font-size: 1.6rem; }
+}

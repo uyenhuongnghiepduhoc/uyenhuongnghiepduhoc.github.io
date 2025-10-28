@@ -7,8 +7,8 @@
     <div class="container">
         <div class="tabs">
             <a href="{{ '/' | relative_url }}" class="tab {% if page.url == '/' or page.url == '' or page.url == '/index.html' %}current{% endif %}">Home</a>
-            <a href="{{ './about.html/' | relative_url }}" class="tab {% if page.url == '/about.html/' %}current{% endif %}">About</a>
-            <a href="{{ './blog.html/' | relative_url }}" class="tab {% if page.url == '/blog.html/' or page.url contains '/blog/' %}current{% endif %}">Blog</a>
+            <a href="{{ './about.html/' | relative_url }}" class="tab {% if page.url == './about.html/' %}current{% endif %}">About</a>
+            <a href="{{ './blog.html/' | relative_url }}" class="tab {% if page.url == './blog.html/' or page.url contains '/blog/' %}current{% endif %}">Blog</a>
         </div>
         <div class="content">
             {{ content }}

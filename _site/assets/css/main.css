@@ -61,7 +61,7 @@ body {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   inset: 6vh 5vw; /* keep some breathing room from viewport edges */
   background: rgba(255,255,255,0.5);
   box-shadow: 0 6px 30px rgba(0,0,0,0.2);
@@ -77,7 +77,7 @@ body {
 
 /* side gray panel (10% width or min 120px) */
 .side-nav {
-  background: #747272; /* light gray */
+  background:  rgba(126, 123, 123, 0.7);
   width: 10%;
   min-width: 120px;
   display: flex;
@@ -100,7 +100,7 @@ body {
   font-family: Neogro, Arial, sans-serif;
 }
 .side-nav a.current {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.85);
   border-radius: 6px;
   padding: 0.4rem 0.6rem;
 }
@@ -111,6 +111,7 @@ body {
   padding: 2.5rem;
   color: #000;
   overflow: auto;
+  max-height: 100%;
   /* ensure text reads well on translucent background */
   -webkit-font-smoothing:antialiased;
   font-family: Neogro, Arial, sans-serif;
@@ -139,10 +140,14 @@ body {
   background: rgba(255,255,255,0.95);
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   border-radius: 6px;
-  display: flex;
+  display: none;
   flex-direction: column;
   min-width: 150px;
   padding: 0.5rem;
+}
+/* show dropdown when not hidden (JS toggles the hidden attribute) */
+.menu-dropdown:not([hidden]) {
+  display: flex;
 }
 .menu-dropdown a {
   padding: 0.5rem 0.6rem;
@@ -204,7 +209,7 @@ body {
     .content .hero {
         position: absolute;
         left: 50%;
-        bottom: 6%;     /* distance from the bottom; adjust as needed */
+        bottom: 15%;     /* distance from the bottom; adjust as needed */
         top: auto;
         transform: translateX(-50%); /* only center horizontally */
         text-align: center;
